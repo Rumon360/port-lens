@@ -1,0 +1,288 @@
+/* ─── Reset & Base ─────────────────────────────────────────────────────────── */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  font-size: 13px;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.15s, color 0.15s;
+}
+
+/* ─── App Shell ────────────────────────────────────────────────────────────── */
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ─── Toolbar ───────────────────────────────────────────────────────────────── */
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  height: 48px;
+  min-height: 48px;
+  background: var(--bg-toolbar);
+  border-bottom: 1px solid var(--border);
+  gap: 12px;
+  flex-shrink: 0;
+  -webkit-app-region: drag;
+}
+
+.toolbar__left,
+.toolbar__center,
+.toolbar__right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  -webkit-app-region: no-drag;
+}
+
+.toolbar__left {
+  min-width: 120px;
+}
+
+.toolbar__right {
+  min-width: 120px;
+  justify-content: flex-end;
+}
+
+.toolbar__title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.2px;
+}
+
+.toolbar__status {
+  font-size: 12px;
+  color: var(--text-secondary);
+}
+
+.toolbar__dot {
+  color: var(--text-muted);
+  margin: 0 2px;
+}
+
+/* ─── Icon Buttons ──────────────────────────────────────────────────────────── */
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  background: var(--btn-bg);
+  color: var(--text-primary);
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.1s, opacity 0.1s;
+}
+
+.icon-btn:hover {
+  background: var(--btn-hover);
+}
+
+.icon-btn:active {
+  opacity: 0.7;
+}
+
+.icon-btn:disabled {
+  opacity: 0.4;
+  cursor: default;
+}
+
+.icon-btn--spinning {
+  animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ─── Table Container ───────────────────────────────────────────────────────── */
+.table-container {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: auto;
+}
+
+/* ─── Table ─────────────────────────────────────────────────────────────────── */
+.port-table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: fixed;
+}
+
+.port-table thead {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.port-table th {
+  padding: 8px 12px;
+  text-align: left;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.port-table td {
+  padding: 7px 12px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-light);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.port-table tbody tr:hover td {
+  background: var(--bg-hover);
+}
+
+/* Column widths */
+.col-port     { width: 70px; }
+.col-proto    { width: 60px; }
+.col-address  { width: 140px; }
+.col-process  { width: 180px; }
+.col-pid      { width: 70px; }
+.col-status   { width: 140px; }
+.col-action   { width: 80px; text-align: center; }
+
+.port-table th.col-action { text-align: center; }
+
+.cell-port {
+  font-variant-numeric: tabular-nums;
+  font-weight: 500;
+}
+
+.cell-pid {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.cell-address {
+  color: var(--text-secondary);
+  font-size: 12px;
+  font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+}
+
+.cell-process {
+  font-weight: 500;
+}
+
+/* ─── Kill Button ───────────────────────────────────────────────────────────── */
+.kill-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px 10px;
+  height: 24px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--danger);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.1s, border-color 0.1s, color 0.1s;
+}
+
+.kill-btn:hover {
+  background: var(--danger);
+  border-color: var(--danger);
+  color: #ffffff;
+}
+
+.kill-btn:active {
+  opacity: 0.8;
+}
+
+/* ─── Status Badge ──────────────────────────────────────────────────────────── */
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.2px;
+}
+
+.status-badge--listen {
+  background: var(--status-listen-bg);
+  color: var(--status-listen-text);
+}
+
+.status-badge--established {
+  background: var(--status-established-bg);
+  color: var(--status-established-text);
+}
+
+.status-badge--time-wait,
+.status-badge--close-wait {
+  background: var(--status-time-wait-bg);
+  color: var(--status-time-wait-text);
+}
+
+.status-badge--other {
+  background: var(--status-other-bg);
+  color: var(--status-other-text);
+}
+
+/* ─── Empty / Loading States ────────────────────────────────────────────────── */
+.table-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
+.table-container::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.table-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 3px;
+}
+
+.table-container::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}

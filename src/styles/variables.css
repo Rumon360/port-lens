@@ -1,0 +1,55 @@
+/* Light theme (default) */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f7;
+  --bg-hover: #ebebeb;
+  --bg-toolbar: #f9f9f9;
+  --text-primary: #111111;
+  --text-secondary: #6e6e73;
+  --text-muted: #aaaaaa;
+  --border: #d1d1d6;
+  --border-light: #e8e8ed;
+  --accent: #0066cc;
+  --danger: #d32f2f;
+  --danger-hover: #b71c1c;
+  --btn-bg: #e8e8ed;
+  --btn-hover: #d8d8dd;
+
+  /* Status colors */
+  --status-listen-bg: #e8f5e9;
+  --status-listen-text: #2e7d32;
+  --status-established-bg: #e3f2fd;
+  --status-established-text: #1565c0;
+  --status-time-wait-bg: #fff3e0;
+  --status-time-wait-text: #e65100;
+  --status-other-bg: #f3e5f5;
+  --status-other-text: #6a1b9a;
+}
+
+/* Dark theme */
+[data-theme='dark'] {
+  --bg-primary: #141414;
+  --bg-secondary: #1c1c1e;
+  --bg-hover: #2c2c2e;
+  --bg-toolbar: #1c1c1e;
+  --text-primary: #f2f2f7;
+  --text-secondary: #aeaeb2;
+  --text-muted: #636366;
+  --border: #38383a;
+  --border-light: #2c2c2e;
+  --accent: #4d9eff;
+  --danger: #ff453a;
+  --danger-hover: #ff6961;
+  --btn-bg: #2c2c2e;
+  --btn-hover: #3a3a3c;
+
+  /* Status colors */
+  --status-listen-bg: #1b2e1c;
+  --status-listen-text: #81c784;
+  --status-established-bg: #172331;
+  --status-established-text: #64b5f6;
+  --status-time-wait-bg: #2e1f00;
+  --status-time-wait-text: #ffb74d;
+  --status-other-bg: #1e1030;
+  --status-other-text: #ce93d8;
+}

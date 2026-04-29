@@ -319,6 +319,8 @@ body {
 .toolbar__search-clear {
   position: absolute;
   right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
   display: inline-flex;
   align-items: center;
   justify-content: center;

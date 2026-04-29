@@ -10,6 +10,10 @@ export interface PortLensAPI {
   refreshNow: () => void;
   /** Kill a process by PID. Rejects with an error message on failure. */
   killProcess: (pid: number) => Promise<void>;
+  /** The current platform (e.g. 'win32', 'darwin', 'linux'). */
+  platform: NodeJS.Platform;
+  /** Restart WinNAT via UAC-elevated PowerShell (Windows only). */
+  restartWinNat: () => Promise<void>;
 }
 
 contextBridge.exposeInMainWorld('portLens', {
@@ -23,4 +27,6 @@ contextBridge.exposeInMainWorld('portLens', {
   refreshNow: () => ipcRenderer.send('ports:refresh'),
 
   killProcess: (pid: number) => ipcRenderer.invoke('ports:kill', { pid }),
+  platform: process.platform,
+  restartWinNat: () => ipcRenderer.invoke('winnat:restart'),
 } as PortLensAPI);

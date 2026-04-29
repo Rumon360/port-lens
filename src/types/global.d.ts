@@ -6,6 +6,8 @@ declare global {
       onPortsUpdate: (cb: (entries: PortEntry[]) => void) => () => void;
       refreshNow: () => void;
       killProcess: (pid: number) => Promise<void>;
+      platform: string;
+      restartWinNat: () => Promise<void>;
     };
   }
 }

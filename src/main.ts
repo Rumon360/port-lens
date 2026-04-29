@@ -1,6 +1,10 @@
 import { app, BrowserWindow, ipcMain } from 'electron';
 import path from 'node:path';
+import { exec } from 'node:child_process';
+import { promisify } from 'node:util';
 import started from 'electron-squirrel-startup';
+
+const execAsync = promisify(exec);
 import { PortScanner } from './services/portScanner';
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -55,6 +59,14 @@ ipcMain.on('ports:refresh', () => {
 
 ipcMain.handle('ports:kill', async (_, { pid }: { pid: number }) => {
   await scanner.killProcess(pid);
+});
+
+ipcMain.handle('winnat:restart', async () => {
+  if (process.platform !== 'win32') throw new Error('Windows only');
+  const cmd =
+    'powershell.exe -NoProfile -NonInteractive -WindowStyle Hidden ' +
+    '-Command "Start-Process cmd -ArgumentList \'/c net stop winnat && net start winnat\' -Verb RunAs -Wait"';
+  await execAsync(cmd);
 });
 
 // ─── App lifecycle ────────────────────────────────────────────────────────────

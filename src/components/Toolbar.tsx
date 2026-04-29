@@ -7,6 +7,8 @@ interface ToolbarProps {
   onToggleTheme: () => void;
   searchQuery: string;
   onSearchChange: (q: string) => void;
+  onRestartWinNat: () => void;
+  restartingWinNat: boolean;
 }
 
 export function Toolbar({
@@ -16,7 +18,10 @@ export function Toolbar({
   onToggleTheme,
   searchQuery,
   onSearchChange,
+  onRestartWinNat,
+  restartingWinNat,
 }: ToolbarProps) {
+  const isWindows = window.portLens.platform === 'win32';
   return (
     <div className="toolbar">
       <div className="toolbar__left">
@@ -59,6 +64,18 @@ export function Toolbar({
         >
           ↻
         </button>
+
+        {isWindows && (
+          <button
+            className={`icon-btn${restartingWinNat ? " icon-btn--spinning" : ""}`}
+            onClick={onRestartWinNat}
+            disabled={restartingWinNat}
+            title="Restart WinNAT (fixes EACCES port errors)"
+            aria-label="Restart WinNAT"
+          >
+            ⚡
+          </button>
+        )}
 
         <button
           className="icon-btn"

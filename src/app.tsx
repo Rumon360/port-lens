@@ -13,6 +13,7 @@ function App() {
   const [entries, setEntries] = useState<PortEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [restartingWinNat, setRestartingWinNat] = useState(false);
 
   const [searchQuery, setSearchQuery] = useState("");
 
@@ -50,6 +51,18 @@ function App() {
     window.portLens.refreshNow();
   }, []);
 
+  const handleRestartWinNat = useCallback(async () => {
+    setRestartingWinNat(true);
+    try {
+      await window.portLens.restartWinNat();
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : String(err);
+      alert(`Could not restart WinNAT: ${msg}`);
+    } finally {
+      setRestartingWinNat(false);
+    }
+  }, []);
+
   return (
     <div className="app">
       <Toolbar
@@ -59,6 +72,8 @@ function App() {
         onToggleTheme={toggle}
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
+        onRestartWinNat={handleRestartWinNat}
+        restartingWinNat={restartingWinNat}
       />
       <PortTable
         entries={filteredEntries}

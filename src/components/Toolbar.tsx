@@ -1,9 +1,6 @@
 import React from 'react';
 
 interface ToolbarProps {
-  count: number;
-  totalCount: number;
-  lastUpdated: Date | null;
   onRefresh: () => void;
   refreshing: boolean;
   theme: 'light' | 'dark';
@@ -12,14 +9,7 @@ interface ToolbarProps {
   onSearchChange: (q: string) => void;
 }
 
-function formatTime(date: Date): string {
-  return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-}
-
 export function Toolbar({
-  count,
-  totalCount,
-  lastUpdated,
   onRefresh,
   refreshing,
   theme,
@@ -27,10 +17,6 @@ export function Toolbar({
   searchQuery,
   onSearchChange,
 }: ToolbarProps) {
-  const countLabel =
-    searchQuery.trim()
-      ? `${count} / ${totalCount} connection${totalCount !== 1 ? 's' : ''}`
-      : `${count} connection${count !== 1 ? 's' : ''}`;
 
   return (
     <div className="toolbar">
@@ -60,16 +46,6 @@ export function Toolbar({
             </button>
           )}
         </div>
-
-        {lastUpdated ? (
-          <span className="toolbar__status">
-            {countLabel}
-            <span className="toolbar__dot"> · </span>
-            updated {formatTime(lastUpdated)}
-          </span>
-        ) : (
-          <span className="toolbar__status">Scanning…</span>
-        )}
       </div>
 
       <div className="toolbar__right">

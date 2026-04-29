@@ -4,6 +4,7 @@ import type { PortEntry } from './types/port';
 import { useTheme } from './hooks/useTheme';
 import { Toolbar } from './components/Toolbar';
 import { PortTable } from './components/PortTable';
+import { StatusBar } from './components/StatusBar';
 import './styles/variables.css';
 import './styles/app.css';
 
@@ -53,9 +54,6 @@ function App() {
   return (
     <div className="app">
       <Toolbar
-        count={filteredEntries.length}
-        totalCount={entries.length}
-        lastUpdated={lastUpdated}
         onRefresh={handleRefresh}
         refreshing={refreshing}
         theme={theme}
@@ -64,6 +62,12 @@ function App() {
         onSearchChange={setSearchQuery}
       />
       <PortTable entries={filteredEntries} loading={loading} onKill={handleKill} />
+      <StatusBar
+        count={filteredEntries.length}
+        totalCount={entries.length}
+        lastUpdated={lastUpdated}
+        searchQuery={searchQuery}
+      />
     </div>
   );
 }

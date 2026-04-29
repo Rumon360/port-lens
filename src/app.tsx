@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import { createRoot } from 'react-dom/client';
 import type { PortEntry } from './types/port';
 import { useTheme } from './hooks/useTheme';
@@ -13,6 +13,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const unsubscribe = window.portLens.onPortsUpdate((data) => {
@@ -23,6 +24,17 @@ function App() {
     });
     return unsubscribe;
   }, []);
+
+  const filteredEntries = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return entries;
+    return entries.filter(
+      (e) =>
+        String(e.port).includes(q) ||
+        e.localAddress.toLowerCase().includes(q) ||
+        e.processName.toLowerCase().includes(q)
+    );
+  }, [entries, searchQuery]);
 
   const handleKill = useCallback(async (pid: number) => {
     try {
@@ -41,14 +53,17 @@ function App() {
   return (
     <div className="app">
       <Toolbar
-        count={entries.length}
+        count={filteredEntries.length}
+        totalCount={entries.length}
         lastUpdated={lastUpdated}
         onRefresh={handleRefresh}
         refreshing={refreshing}
         theme={theme}
         onToggleTheme={toggle}
+        searchQuery={searchQuery}
+        onSearchChange={setSearchQuery}
       />
-      <PortTable entries={entries} loading={loading} onKill={handleKill} />
+      <PortTable entries={filteredEntries} loading={loading} onKill={handleKill} />
     </div>
   );
 }

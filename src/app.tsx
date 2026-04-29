@@ -1,26 +1,25 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
-import { createRoot } from 'react-dom/client';
-import type { PortEntry } from './types/port';
-import { useTheme } from './hooks/useTheme';
-import { Toolbar } from './components/Toolbar';
-import { PortTable } from './components/PortTable';
-import { StatusBar } from './components/StatusBar';
-import './styles/variables.css';
-import './styles/app.css';
+import React, { useState, useEffect, useCallback, useMemo } from "react";
+import { createRoot } from "react-dom/client";
+import type { PortEntry } from "./types/port";
+import { useTheme } from "./hooks/useTheme";
+import { Toolbar } from "./components/Toolbar";
+import { PortTable } from "./components/PortTable";
+import { StatusBar } from "./components/StatusBar";
+import "./styles/variables.css";
+import "./styles/app.css";
 
 function App() {
   const { theme, toggle } = useTheme();
   const [entries, setEntries] = useState<PortEntry[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [lastUpdated, setLastUpdated] = useState<Date | null>(null);
-  const [searchQuery, setSearchQuery] = useState('');
+
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     const unsubscribe = window.portLens.onPortsUpdate((data) => {
       setEntries(data);
       setLoading(false);
-      setLastUpdated(new Date());
       setRefreshing(false);
     });
     return unsubscribe;
@@ -61,17 +60,20 @@ function App() {
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
       />
-      <PortTable entries={filteredEntries} loading={loading} onKill={handleKill} />
+      <PortTable
+        entries={filteredEntries}
+        loading={loading}
+        onKill={handleKill}
+      />
       <StatusBar
         count={filteredEntries.length}
         totalCount={entries.length}
-        lastUpdated={lastUpdated}
         searchQuery={searchQuery}
       />
     </div>
   );
 }
 
-const rootEl = document.getElementById('root') as HTMLElement;
+const rootEl = document.getElementById("root") as HTMLElement;
 const root = createRoot(rootEl);
 root.render(<App />);

@@ -16,13 +16,16 @@ body,
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
   font-size: 13px;
   background-color: var(--bg-primary);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
-  transition: background-color 0.15s, color 0.15s;
+  transition:
+    background-color 0.15s,
+    color 0.15s;
 }
 
 /* ─── App Shell ────────────────────────────────────────────────────────────── */
@@ -96,7 +99,9 @@ body {
   color: var(--text-primary);
   cursor: pointer;
   font-size: 14px;
-  transition: background 0.1s, opacity 0.1s;
+  transition:
+    background 0.1s,
+    opacity 0.1s;
 }
 
 .icon-btn:hover {
@@ -117,7 +122,9 @@ body {
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 /* ─── Table Container ───────────────────────────────────────────────────────── */
@@ -168,15 +175,32 @@ body {
 }
 
 /* Column widths */
-.col-port     { width: 70px; }
-.col-proto    { width: 60px; }
-.col-address  { width: 140px; }
-.col-process  { width: 180px; }
-.col-pid      { width: 70px; }
-.col-status   { width: 140px; }
-.col-action   { width: 80px; text-align: center; }
+.col-port {
+  width: 70px;
+}
+.col-proto {
+  width: 60px;
+}
+.col-address {
+  width: 140px;
+}
+.col-process {
+  width: 180px;
+}
+.col-pid {
+  width: 70px;
+}
+.col-status {
+  width: 140px;
+}
+.col-action {
+  width: 80px;
+  text-align: center;
+}
 
-.port-table th.col-action { text-align: center; }
+.port-table th.col-action {
+  text-align: center;
+}
 
 .cell-port {
   font-variant-numeric: tabular-nums;
@@ -192,7 +216,7 @@ body {
 .cell-address {
   color: var(--text-secondary);
   font-size: 12px;
-  font-family: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
+  font-family: "SF Mono", "Cascadia Code", "Fira Code", monospace;
 }
 
 .cell-process {
@@ -213,7 +237,10 @@ body {
   font-size: 12px;
   font-weight: 500;
   cursor: pointer;
-  transition: background 0.1s, border-color 0.1s, color 0.1s;
+  transition:
+    background 0.1s,
+    border-color 0.1s,
+    color 0.1s;
 }
 
 .kill-btn:hover {
@@ -291,6 +318,7 @@ body {
 .status-bar {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 0 16px;
   height: 28px;
   min-height: 28px;

@@ -1,6 +1,6 @@
-import React, { useCallback } from 'react';
-import type { PortEntry } from '../types/port';
-import { TableRow } from './TableRow';
+import React, { useCallback } from "react";
+import type { PortEntry } from "../types/port";
+import { TableRow } from "./TableRow";
 
 interface PortTableProps {
   entries: PortEntry[];
@@ -31,7 +31,7 @@ export function PortTable({ entries, loading, onKill }: PortTableProps) {
             </tr>
           </thead>
           <tbody>
-            {entries.map(entry => (
+            {entries.map((entry) => (
               <TableRow key={entry.key} entry={entry} onKill={handleKill} />
             ))}
           </tbody>

@@ -1,55 +1,75 @@
-/* Light theme (default) */
+/* ─── Easing ────────────────────────────────────────────────────────────────── */
 :root {
-  --bg-primary: #ffffff;
-  --bg-secondary: #f5f5f7;
-  --bg-hover: #ebebeb;
-  --bg-toolbar: #f9f9f9;
-  --text-primary: #111111;
-  --text-secondary: #6e6e73;
-  --text-muted: #aaaaaa;
-  --border: #d1d1d6;
-  --border-light: #e8e8ed;
-  --accent: #0066cc;
-  --danger: #d32f2f;
-  --danger-hover: #b71c1c;
-  --btn-bg: #e8e8ed;
-  --btn-hover: #d8d8dd;
-
-  /* Status colors */
-  --status-listen-bg: #e8f5e9;
-  --status-listen-text: #2e7d32;
-  --status-established-bg: #e3f2fd;
-  --status-established-text: #1565c0;
-  --status-time-wait-bg: #fff3e0;
-  --status-time-wait-text: #e65100;
-  --status-other-bg: #f3e5f5;
-  --status-other-text: #6a1b9a;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-/* Dark theme */
-[data-theme='dark'] {
-  --bg-primary: #141414;
-  --bg-secondary: #1c1c1e;
-  --bg-hover: #2c2c2e;
-  --bg-toolbar: #1c1c1e;
-  --text-primary: #f2f2f7;
-  --text-secondary: #aeaeb2;
-  --text-muted: #636366;
-  --border: #38383a;
-  --border-light: #2c2c2e;
-  --accent: #4d9eff;
-  --danger: #ff453a;
-  --danger-hover: #ff6961;
-  --btn-bg: #2c2c2e;
-  --btn-hover: #3a3a3c;
+/* ─── Light Theme ───────────────────────────────────────────────────────────── */
+:root {
+  --bg-primary: #fafafa;
+  --bg-secondary: #f4f4f5;
+  --bg-hover: rgba(9, 9, 11, 0.045);
+  --bg-toolbar: #ffffff;
 
-  /* Status colors */
-  --status-listen-bg: #1b2e1c;
-  --status-listen-text: #81c784;
-  --status-established-bg: #172331;
-  --status-established-text: #64b5f6;
-  --status-time-wait-bg: #2e1f00;
-  --status-time-wait-text: #ffb74d;
-  --status-other-bg: #1e1030;
-  --status-other-text: #ce93d8;
+  --text-primary: #09090b;
+  --text-secondary: #71717a;
+  --text-muted: #a1a1aa;
+
+  --border: #e4e4e7;
+  --border-light: #f0f0f2;
+
+  --accent: #2563eb;
+  --accent-subtle: rgba(37, 99, 235, 0.07);
+
+  --danger: #dc2626;
+  --danger-subtle: rgba(220, 38, 38, 0.07);
+  --danger-hover: #b91c1c;
+
+  --btn-bg: #f0f0f2;
+  --btn-hover: #e4e4e7;
+
+  /* Status badge colors */
+  --status-listen-bg: #f0fdf4;
+  --status-listen-text: #15803d;
+  --status-established-bg: #eff6ff;
+  --status-established-text: #1d4ed8;
+  --status-time-wait-bg: #fffbeb;
+  --status-time-wait-text: #b45309;
+  --status-other-bg: #f4f4f5;
+  --status-other-text: #71717a;
+}
+
+/* ─── Dark Theme ────────────────────────────────────────────────────────────── */
+[data-theme='dark'] {
+  --bg-primary: #09090b;
+  --bg-secondary: #111113;
+  --bg-hover: rgba(255, 255, 255, 0.05);
+  --bg-toolbar: #0d0d10;
+
+  --text-primary: #fafafa;
+  --text-secondary: #a1a1aa;
+  --text-muted: #52525b;
+
+  --border: #27272a;
+  --border-light: #1c1c1f;
+
+  --accent: #3b82f6;
+  --accent-subtle: rgba(59, 130, 246, 0.1);
+
+  --danger: #f87171;
+  --danger-subtle: rgba(248, 113, 113, 0.1);
+  --danger-hover: #fca5a5;
+
+  --btn-bg: #1c1c1f;
+  --btn-hover: #27272a;
+
+  /* Status badge colors */
+  --status-listen-bg: rgba(74, 222, 128, 0.08);
+  --status-listen-text: #4ade80;
+  --status-established-bg: rgba(96, 165, 250, 0.08);
+  --status-established-text: #60a5fa;
+  --status-time-wait-bg: rgba(251, 191, 36, 0.08);
+  --status-time-wait-text: #fbbf24;
+  --status-other-bg: rgba(82, 82, 91, 0.25);
+  --status-other-text: #a1a1aa;
 }

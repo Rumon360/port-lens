@@ -17,22 +17,24 @@ async function scanWindows(): Promise<PortEntry[]> {
   const pidSet = new Set<number>();
 
   for (const line of lines) {
-    const trimmed = line.trim();
-    // Match TCP and UDP rows
-    const match = trimmed.match(
-      /^(TCP|UDP)\s+(\S+):(\d+)\s+\S+\s+(\S+)\s+(\d+)/i
-    );
-    if (!match) continue;
+    const parts = line.trim().split(/\s+/);
+    if (parts.length < 4) continue;
 
-    const protocol = match[1].toUpperCase() as 'TCP' | 'UDP';
-    const localAddress = match[2];
-    const port = parseInt(match[3], 10);
-    const rawStatus = match[4];
-    // UDP rows have PID in position 4 (no state column)
-    const pid = protocol === 'UDP'
-      ? parseInt(match[4], 10)
-      : parseInt(match[5], 10);
-    const status = protocol === 'UDP' ? '' : rawStatus;
+    const proto = parts[0].toUpperCase();
+    if (proto !== 'TCP' && proto !== 'UDP') continue;
+    const protocol = proto as 'TCP' | 'UDP';
+
+    // Local address is "ip:port" — split on last colon to handle IPv6
+    const localFull = parts[1];
+    const colonIdx = localFull.lastIndexOf(':');
+    if (colonIdx === -1) continue;
+    const localAddress = localFull.slice(0, colonIdx);
+    const port = parseInt(localFull.slice(colonIdx + 1), 10);
+
+    // TCP rows: [proto, local, foreign, state, pid] — 5 parts
+    // UDP rows: [proto, local, foreign, pid]         — 4 parts
+    const status = protocol === 'TCP' ? (parts[3] ?? '') : '';
+    const pid = parseInt(parts[parts.length - 1], 10);
 
     if (isNaN(pid) || isNaN(port)) continue;
 

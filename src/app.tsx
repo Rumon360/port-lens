@@ -32,8 +32,8 @@ function App() {
     return entries.filter(
       (e) =>
         String(e.port).includes(q) ||
-        e.localAddress.toLowerCase().includes(q) ||
-        e.processName.toLowerCase().includes(q)
+        (e.localAddress ?? '').toLowerCase().includes(q) ||
+        (e.processName ?? '').toLowerCase().includes(q)
     );
   }, [entries, searchQuery]);
 

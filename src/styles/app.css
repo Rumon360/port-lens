@@ -286,3 +286,55 @@ body {
 .table-container::-webkit-scrollbar-thumb:hover {
   background: var(--text-muted);
 }
+
+/* ─── Search ────────────────────────────────────────────────────────────────── */
+.toolbar__search-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.toolbar__search {
+  width: 220px;
+  height: 28px;
+  padding: 0 28px 0 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  font-size: 12px;
+  font-family: inherit;
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.toolbar__search:focus {
+  border-color: var(--accent);
+}
+
+.toolbar__search::placeholder {
+  color: var(--text-secondary);
+}
+
+.toolbar__search-clear {
+  position: absolute;
+  right: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 14px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  border-radius: 3px;
+  transition: color 0.1s;
+}
+
+.toolbar__search-clear:hover {
+  color: var(--text-primary);
+}

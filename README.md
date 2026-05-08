@@ -13,7 +13,11 @@ A lightweight cross-platform desktop app for monitoring active TCP/UDP ports and
 - Live table of all active TCP and UDP connections, refreshed every 2.5 seconds
 - Shows Port, Protocol, Local Address, Process Name, PID, and Status
 - Filter connections instantly by port, address, or process name
-- Kill any process directly from the table (with confirmation)
+- **Open in browser** — click ↗ on any TCP row to launch `http(s)://localhost:<port>` in your default browser
+- **Copy localhost URL** — clipboard icon copies the URL; flips to ✓ for confirmation
+- **Service labels** — common ports auto-labeled: `5173 · Vite`, `3000 · React · Next`, `5432 · Postgres`, `6379 · Redis`, and more
+- **HTTPS detection** — ports 443 and 8443 resolve to `https://` automatically
+- **Free port** — LISTEN ports show a "Free" button with a port-centric confirm dialog; established connections show "Kill"
 - Restart WinNAT service in one click to fix EACCES port permission errors (Windows)
 - Manual refresh button
 - Dark and light themes — respects your system preference on first launch, persists your choice
@@ -73,6 +77,8 @@ src/
 │   └── global.d.ts          — window.portLens TypeScript declarations
 ├── services/
 │   └── portScanner.ts       — Cross-platform port scanning and process killing
+├── utils/
+│   └── portLabels.ts        — Port → service name map, localhost URL helpers
 ├── components/
 │   ├── PortTable.tsx        — Table container
 │   ├── TableRow.tsx         — Single row (React.memo for efficient updates)
@@ -107,6 +113,7 @@ Killing a process runs `taskkill /PID <pid> /F` on Windows or `kill -9 <pid>` on
 | `ports:update`   | main → renderer | Full port list push                |
 | `ports:refresh`  | renderer → main | Trigger immediate scan             |
 | `ports:kill`     | renderer ↔ main | Kill a process by PID              |
+| `shell:openUrl`  | renderer ↔ main | Open URL in default browser        |
 | `winnat:restart` | renderer ↔ main | Restart WinNAT via elevated shell  |
 
 ## Fixing EACCES Port Errors (Windows)

@@ -1,3 +1,8 @@
+/* ─── Theme switch: suppress all transitions for one frame ─────────────────── */
+.no-transitions * {
+  transition: none !important;
+}
+
 /* ─── Reset & Base ─────────────────────────────────────────────────────────── */
 *,
 *::before,
@@ -26,9 +31,6 @@ body {
   background-color: var(--bg-primary);
   color: var(--text-primary);
   -webkit-font-smoothing: antialiased;
-  transition:
-    background-color 0.2s var(--ease-out),
-    color 0.2s var(--ease-out);
 }
 
 /* ─── App Shell ────────────────────────────────────────────────────────────── */

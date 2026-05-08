@@ -18,7 +18,13 @@ export function useTheme() {
     localStorage.setItem('theme', theme);
   }, [theme]);
 
-  const toggle = () => setTheme(t => (t === 'dark' ? 'light' : 'dark'));
+  const toggle = () => {
+    document.documentElement.classList.add('no-transitions');
+    requestAnimationFrame(() =>
+      document.documentElement.classList.remove('no-transitions')
+    );
+    setTheme(t => (t === 'dark' ? 'light' : 'dark'));
+  };
 
   return { theme, toggle };
 }

@@ -8,6 +8,7 @@ declare global {
       killProcess: (pid: number) => Promise<void>;
       platform: string;
       restartWinNat: () => Promise<void>;
+      openUrl: (url: string) => Promise<void>;
     };
   }
 }

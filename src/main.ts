@@ -1,4 +1,4 @@
-import { app, BrowserWindow, ipcMain } from 'electron';
+import { app, BrowserWindow, ipcMain, shell } from 'electron';
 import path from 'node:path';
 import { exec } from 'node:child_process';
 import { promisify } from 'node:util';
@@ -59,6 +59,10 @@ ipcMain.on('ports:refresh', () => {
 
 ipcMain.handle('ports:kill', async (_, { pid }: { pid: number }) => {
   await scanner.killProcess(pid);
+});
+
+ipcMain.handle('shell:openUrl', async (_, { url }: { url: string }) => {
+  await shell.openExternal(url);
 });
 
 ipcMain.handle('winnat:restart', async () => {

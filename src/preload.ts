@@ -14,6 +14,8 @@ export interface PortLensAPI {
   platform: NodeJS.Platform;
   /** Restart WinNAT via UAC-elevated PowerShell (Windows only). */
   restartWinNat: () => Promise<void>;
+  /** Open a URL in the system default browser. */
+  openUrl: (url: string) => Promise<void>;
 }
 
 contextBridge.exposeInMainWorld('portLens', {
@@ -29,4 +31,5 @@ contextBridge.exposeInMainWorld('portLens', {
   killProcess: (pid: number) => ipcRenderer.invoke('ports:kill', { pid }),
   platform: process.platform,
   restartWinNat: () => ipcRenderer.invoke('winnat:restart'),
+  openUrl: (url: string) => ipcRenderer.invoke('shell:openUrl', { url }),
 } as PortLensAPI);
